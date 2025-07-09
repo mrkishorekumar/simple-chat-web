@@ -2,16 +2,12 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import ChatBox from '../components/ChatBox';
 import { socket } from '../socket';
+import { useSyncedChatList } from '../hook/useSyncedChatList';
 
-type ChatMessage = { text: string; sender: string };
 
 export default function Chatroom() {
     const [newChatAddress, setNewChatAddress] = useState('');
-    const [chatList, setChatList] = useState<{
-        id: number;
-        receiver_wallet_key: string;
-        chat: ChatMessage[];
-    }[]>([]);
+    const [chatList, setChatList] = useSyncedChatList();
     const [chatopen, setChatOpen] = useState<{ receiver_wallet_key: string }>({ receiver_wallet_key: '' });
 
     const handleCreateChat = async (e: React.FormEvent) => {
