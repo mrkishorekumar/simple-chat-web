@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const [userWalletKey, setUserWalletKey] = useState('');
@@ -21,7 +22,7 @@ export default function Login() {
       }, 500); // Clear after 24 hours
       
     } else {
-      alert(res.data.message);
+      toast.error(res.data.message)
     }
   };
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import React, { useState, useEffect } from 'react';
 import ChatBox from '../components/ChatBox';
 import { socket } from '../socket';
@@ -14,7 +15,7 @@ export default function Chatroom() {
         e.preventDefault();
         const res = await axios.get(`https://testapi.ghostx.chat/api/users/${newChatAddress}/exists`) as { data: { status: boolean, message: string } };
         if (!res.data.status) {
-            alert(res.data.message);
+            toast.error(res.data.message)
             return;
         }
         setChatList((prev) => {
